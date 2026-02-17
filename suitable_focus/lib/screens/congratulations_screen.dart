@@ -84,7 +84,6 @@ class CongratulationsScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    print('Continue button pressed'); // Debug
                     // Navigate to home screen and clear navigation stack
                     Navigator.pushAndRemoveUntil(
                       context,

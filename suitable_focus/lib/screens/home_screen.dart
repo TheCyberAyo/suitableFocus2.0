@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../constants/app_colors.dart';
+import '../providers/cart_provider.dart';
 import 'events_screen.dart';
+import 'learn_screen.dart';
+import 'community_screen.dart';
+import 'services_screen.dart';
+import 'faqs_screen.dart';
+import 'cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,14 +41,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  // Greeting
+                  // Greeting - Centered
                   const Expanded(
-                    child: Text(
-                      'Good Afternoon, Dylan Cairns',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                    child: Center(
+                      child: Text(
+                        'Hello, Ayongezwa',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
@@ -54,12 +63,60 @@ class _HomeScreenState extends State<HomeScreen> {
                     onPressed: () {},
                   ),
                   // Cart Icon
-                  IconButton(
-                    icon: Icon(
-                      Icons.shopping_cart,
-                      color: AppColors.accentColor,
-                    ),
-                    onPressed: () {},
+                  Consumer<CartProvider>(
+                    builder: (context, cartProvider, child) {
+                      return Stack(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.shopping_cart,
+                              color: AppColors.accentColor,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const CartScreen(),
+                                ),
+                              );
+                            },
+                          ),
+                          if (cartProvider.itemCount > 0)
+                            Positioned(
+                              right: 8,
+                              top: 8,
+                              child: Container(
+                                padding: const EdgeInsets.all(4),
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  shape: BoxShape.circle,
+                                ),
+                                constraints: const BoxConstraints(
+                                  minWidth: 16,
+                                  minHeight: 16,
+                                ),
+                                child: Text(
+                                  '${cartProvider.itemCount}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  // Logo
+                  Image.asset(
+                    'assets/images/suitableFocus.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.contain,
                   ),
                 ],
               ),
@@ -77,20 +134,20 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildContinueItem(
                       Icons.menu_book,
                       'SARS Compliance 101',
-                      '15%',
-                      0.15,
+                      '10%',
+                      0.10,
                     ),
                     _buildContinueItem(
                       Icons.lightbulb,
                       "Let's Elevate",
-                      '100%',
-                      1.0,
+                      '10%',
+                      0.10,
                     ),
                     _buildContinueItem(
                       Icons.groups,
                       'Eduvos x SF Hub',
-                      '100%',
-                      1.0,
+                      '10%',
+                      0.10,
                     ),
 
                     const SizedBox(height: 24),
@@ -104,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: AppColors.inputBackground,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
-                            color: AppColors.accentColor.withOpacity(0.3),
+                            color: AppColors.accentColor.withValues(alpha: 0.3),
                             width: 1,
                           ),
                         ),
@@ -163,9 +220,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemCount: 3,
                         itemBuilder: (context, index) {
                           final events = [
-                            'Successful incubation w/ Eduvos',
-                            'Building A Legacy w/ Rudy Paige',
-                            'Unlocking AI w/ Edunova',
+                            'Successful incubation with Eduvos',
+                            'Building A Legacy with Rudy Paige',
+                            'Unlocking AI with Eduvos',
+                          ];
+                          final images = [
+                            'assets/images/incubation.jpg',
+                            'assets/images/Rudy.jpg',
+                            'assets/images/SuccessfulAi.jpg',
                           ];
                           return Container(
                             width: 200,
@@ -174,14 +236,30 @@ class _HomeScreenState extends State<HomeScreen> {
                             decoration: BoxDecoration(
                               color: AppColors.accentColor,
                               borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: AssetImage(images[index]),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withValues(alpha: 0.5),
+                                  BlendMode.darken,
+                                ),
+                              ),
                             ),
-                            child: Center(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
                               child: Text(
                                 events[index],
                                 style: const TextStyle(
-                                  color: Colors.black,
+                                  color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(1, 1),
+                                      blurRadius: 3,
+                                      color: Colors.black,
+                                    ),
+                                  ],
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -212,6 +290,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Negotiation 101',
                             'Content Strategy',
                           ];
+                          final images = [
+                            'assets/images/AISmallBusiness.png',
+                            'assets/images/Scaling.jpg',
+                            'assets/images/workflow.jpeg',
+                            'assets/images/nagotiation.jpeg',
+                            'assets/images/contentStrategy.jpeg',
+                          ];
                           return Container(
                             width: 160,
                             margin: const EdgeInsets.only(right: 12),
@@ -219,6 +304,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             decoration: BoxDecoration(
                               color: AppColors.accentColor,
                               borderRadius: BorderRadius.circular(12),
+                              image: DecorationImage(
+                                image: AssetImage(images[index]),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withValues(alpha: 0.5),
+                                  BlendMode.darken,
+                                ),
+                              ),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -227,7 +320,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   alignment: Alignment.topRight,
                                   child: Icon(
                                     Icons.star,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     size: 20,
                                   ),
                                 ),
@@ -235,9 +328,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(
                                   courses[index],
                                   style: const TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
+                                    shadows: [
+                                      Shadow(
+                                        offset: Offset(1, 1),
+                                        blurRadius: 3,
+                                        color: Colors.black,
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 const SizedBox(height: 8),
@@ -245,15 +345,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     Icon(
                                       Icons.access_time,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       size: 16,
                                     ),
                                     const SizedBox(width: 4),
                                     const Text(
                                       '1hr',
                                       style: TextStyle(
-                                        color: Colors.black,
+                                        color: Colors.white,
                                         fontSize: 12,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(1, 1),
+                                            blurRadius: 3,
+                                            color: Colors.black,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -274,7 +381,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 12),
                     _buildDiscoverItem(Icons.attach_money, 'Refer & Earn'),
                     _buildDiscoverItem(Icons.library_books, 'Resources'),
-                    _buildDiscoverItem(Icons.help_outline, 'View FAQs'),
+                    _buildDiscoverItem(
+                      Icons.help_outline,
+                      'View FAQs',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const FAQsScreen()),
+                        );
+                      },
+                    ),
 
                     const SizedBox(height: 24),
                   ],
@@ -383,7 +499,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: AppColors.inputBackground,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: AppColors.accentColor.withOpacity(0.3),
+              color: AppColors.accentColor.withValues(alpha: 0.3),
               width: 1,
             ),
           ),
@@ -423,32 +539,36 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildDiscoverItem(IconData icon, String title) {
+  Widget _buildDiscoverItem(IconData icon, String title, {VoidCallback? onTap}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.inputBackground,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppColors.accentColor,
-              size: 24,
-            ),
-            const SizedBox(width: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(8),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.inputBackground,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                color: AppColors.accentColor,
+                size: 24,
               ),
-            ),
-          ],
+              const SizedBox(width: 16),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -460,7 +580,7 @@ class _HomeScreenState extends State<HomeScreen> {
         color: AppColors.inputBackground,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withValues(alpha: 0.3),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -474,6 +594,21 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const EventsScreen()),
+            );
+          } else if (index == 2) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ServicesScreen()),
+            );
+          } else if (index == 3) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LearnScreen()),
+            );
+          } else if (index == 4) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CommunityScreen()),
             );
           } else {
             setState(() {
@@ -495,12 +630,12 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Events',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.menu_book),
+            label: 'Services',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_fire_department),
-            label: 'Trending',
+            icon: Icon(Icons.school),
+            label: 'Learn',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.groups),

@@ -10,7 +10,18 @@ class InitialScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: Column(
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/suitableFocus.png'),
+              fit: BoxFit.cover,
+              colorFilter: ColorFilter.mode(
+                Colors.black.withValues(alpha: 0.5),
+                BlendMode.darken,
+              ),
+            ),
+          ),
+          child: Column(
           children: [
             // Spacer to push content to bottom half
             const Spacer(),
@@ -138,8 +149,24 @@ class InitialScreen extends StatelessWidget {
             const SizedBox(height: 60),
           ],
         ),
+        ),
       ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

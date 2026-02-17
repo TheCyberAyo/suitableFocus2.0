@@ -68,7 +68,7 @@ class _JoinScreenState extends State<JoinScreen> {
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Full Name',
-                  hintStyle: TextStyle(color: AppColors.accentColor.withOpacity(0.7)),
+                  hintStyle: TextStyle(color: AppColors.accentColor.withValues(alpha: 0.7)),
                   filled: true,
                   fillColor: AppColors.inputBackground,
                   border: OutlineInputBorder(
@@ -107,7 +107,7 @@ class _JoinScreenState extends State<JoinScreen> {
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Email',
-                  hintStyle: TextStyle(color: AppColors.accentColor.withOpacity(0.7)),
+                  hintStyle: TextStyle(color: AppColors.accentColor.withValues(alpha: 0.7)),
                   filled: true,
                   fillColor: AppColors.inputBackground,
                   border: OutlineInputBorder(
@@ -147,7 +147,7 @@ class _JoinScreenState extends State<JoinScreen> {
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Create Username',
-                  hintStyle: TextStyle(color: AppColors.accentColor.withOpacity(0.7)),
+                  hintStyle: TextStyle(color: AppColors.accentColor.withValues(alpha: 0.7)),
                   filled: true,
                   fillColor: AppColors.inputBackground,
                   border: OutlineInputBorder(
@@ -187,7 +187,7 @@ class _JoinScreenState extends State<JoinScreen> {
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Create Password',
-                  hintStyle: TextStyle(color: AppColors.accentColor.withOpacity(0.7)),
+                  hintStyle: TextStyle(color: AppColors.accentColor.withValues(alpha: 0.7)),
                   filled: true,
                   fillColor: AppColors.inputBackground,
                   border: OutlineInputBorder(
@@ -227,7 +227,7 @@ class _JoinScreenState extends State<JoinScreen> {
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'Confirm Password',
-                  hintStyle: TextStyle(color: AppColors.accentColor.withOpacity(0.7)),
+                  hintStyle: TextStyle(color: AppColors.accentColor.withValues(alpha: 0.7)),
                   filled: true,
                   fillColor: AppColors.inputBackground,
                   border: OutlineInputBorder(

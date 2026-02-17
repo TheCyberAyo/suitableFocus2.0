@@ -175,7 +175,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: _isCodeComplete
                         ? AppColors.accentColor
-                        : AppColors.accentColor.withOpacity(0.5),
+                        : AppColors.accentColor.withValues(alpha: 0.5),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
