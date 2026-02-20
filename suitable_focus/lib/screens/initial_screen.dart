@@ -10,18 +10,7 @@ class InitialScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/suitableFocus.png'),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Colors.black.withValues(alpha: 0.5),
-                BlendMode.darken,
-              ),
-            ),
-          ),
-          child: Column(
+        child: Column(
           children: [
             // Spacer to push content to bottom half
             const Spacer(),
@@ -67,6 +56,17 @@ class InitialScreen extends StatelessWidget {
               ),
             ),
             
+            // Logo above main text content
+            Padding(
+              padding: const EdgeInsets.only(bottom: 24.0),
+              child: Image.asset(
+                'assets/images/suitableFocus.png',
+                width: 120,
+                height: 120,
+                fit: BoxFit.contain,
+              ),
+            ),
+
             // Main text content
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -148,7 +148,6 @@ class InitialScreen extends StatelessWidget {
             
             const SizedBox(height: 60),
           ],
-        ),
         ),
       ),
     );

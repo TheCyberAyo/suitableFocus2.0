@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../constants/app_colors.dart';
 import '../providers/cart_provider.dart';
@@ -6,6 +6,10 @@ import 'events_screen.dart';
 import 'community_screen.dart';
 import 'services_screen.dart';
 import 'cart_screen.dart';
+import 'course_intro_screen.dart';
+import 'ideation_foundation_course_screen.dart';
+import 'where_do_i_start_course_screen.dart';
+import 'ideal_customer_profile_course_screen.dart';
 
 class LearnScreen extends StatefulWidget {
   const LearnScreen({super.key});
@@ -29,6 +33,14 @@ class _LearnScreenState extends State<LearnScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
+                  // Logo
+                  Image.asset(
+                    'assets/images/suitableFocus.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(width: 12),
                   // User Avatar
                   CircleAvatar(
                     radius: 20,
@@ -107,14 +119,6 @@ class _LearnScreenState extends State<LearnScreen> {
                         ],
                       );
                     },
-                  ),
-                  const SizedBox(width: 8),
-                  // Logo
-                  Image.asset(
-                    'assets/images/suitableFocus.png',
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.contain,
                   ),
                 ],
               ),
@@ -218,88 +222,128 @@ class _LearnScreenState extends State<LearnScreen> {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           final courses = [
-                            'AI & Small Business',
-                            'Scaling in African Markets',
-                            'Workflow Management',
-                            'Negotiation 101',
+                            'Introduction to SF courses',
+                            'Ideation to Foundation',
+                            'Where Do I Start?',
+                            'Ideal Customer Profile',
                             'Content Strategy',
                           ];
                           final images = [
-                            'assets/images/AISmallBusiness.png',
-                            'assets/images/Scaling.jpg',
-                            'assets/images/workflow.jpeg',
-                            'assets/images/nagotiation.jpeg',
+                            'assets/images/suitableFocus.png',
+                            'assets/images/ideation_to_foundation.png',
+                            'assets/images/where_do_i_start.png',
+                            'assets/images/ideal_customer_profile.png',
                             'assets/images/contentStrategy.jpeg',
                           ];
-                          return Container(
-                            width: 160,
-                            margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: AppColors.accentColor,
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                image: AssetImage(images[index]),
-                                fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                  Colors.black.withValues(alpha: 0.5),
-                                  BlendMode.darken,
-                                ),
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Icon(
-                                    Icons.star,
-                                    color: Colors.white,
-                                    size: 20,
+                          return GestureDetector(
+                            onTap: () {
+                              // Navigate to course intro screen for "Introduction to SF courses"
+                              if (index == 0) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CourseIntroScreen(),
+                                  ),
+                                );
+                              }
+                              // Navigate to Ideation to Foundation course
+                              else if (index == 1) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const IdeationFoundationCourseScreen(),
+                                  ),
+                                );
+                              }
+                              // Navigate to Where Do I Start? course
+                              else if (index == 2) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const WhereDoIStartCourseScreen(),
+                                  ),
+                                );
+                              }
+                              // Navigate to Ideal Customer Profile course
+                              else if (index == 3) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const IdealCustomerProfileCourseScreen(),
+                                  ),
+                                );
+                              }
+                            },
+                            child: Container(
+                              width: 160,
+                              margin: const EdgeInsets.only(right: 12),
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                color: AppColors.accentColor,
+                                borderRadius: BorderRadius.circular(12),
+                                image: DecorationImage(
+                                  image: AssetImage(images[index]),
+                                  fit: BoxFit.cover,
+                                  colorFilter: ColorFilter.mode(
+                                    Colors.black.withValues(alpha: 0.5),
+                                    BlendMode.darken,
                                   ),
                                 ),
-                                const Spacer(),
-                                Text(
-                                  courses[index],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 3,
-                                        color: Colors.black,
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topRight,
+                                    child: Icon(
+                                      Icons.star,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  Text(
+                                    courses[index],
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      shadows: [
+                                        Shadow(
+                                          offset: Offset(1, 1),
+                                          blurRadius: 3,
+                                          color: Colors.black,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.access_time,
+                                        color: Colors.white,
+                                        size: 16,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      const Text(
+                                        '1hr',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          shadows: [
+                                            Shadow(
+                                              offset: Offset(1, 1),
+                                              blurRadius: 3,
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.access_time,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    const Text(
-                                      '1hr',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        shadows: [
-                                          Shadow(
-                                            offset: Offset(1, 1),
-                                            blurRadius: 3,
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
@@ -320,7 +364,7 @@ class _LearnScreenState extends State<LearnScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemCount: 1,
                         itemBuilder: (context, index) {
-                          final course = 'Negotiation 101';
+                          final course = 'Ideal Customer Profile';
                           final image = 'assets/images/nagotiation.jpeg';
                           return Container(
                             width: 160,
@@ -617,4 +661,8 @@ class _LearnScreenState extends State<LearnScreen> {
     );
   }
 }
+
+
+
+
 

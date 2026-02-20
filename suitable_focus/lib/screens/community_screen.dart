@@ -27,6 +27,47 @@ class _CommunityScreenState extends State<CommunityScreen> {
     super.dispose();
   }
 
+  Future<void> _confirmAndOpenExternalUrl(Uri url, String platform) async {
+    final shouldOpen = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: AppColors.inputBackground,
+          title: Text(
+            'Open External App',
+            style: TextStyle(color: AppColors.accentColor),
+          ),
+          content: Text(
+            'You are about to leave Suitable Focus and open $platform in an external app or browser.',
+            style: const TextStyle(color: Colors.white),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Cancel', style: TextStyle(color: Colors.white70)),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text('Continue', style: TextStyle(color: AppColors.accentColor)),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldOpen != true) return;
+
+    final opened = await launchUrl(url, mode: LaunchMode.externalApplication);
+    if (!opened && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Could not open $platform right now.'),
+          backgroundColor: Colors.red[700],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,6 +80,14 @@ class _CommunityScreenState extends State<CommunityScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
+                  // Logo
+                  Image.asset(
+                    'assets/images/suitableFocus.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(width: 12),
                   // User Avatar
                   CircleAvatar(
                     radius: 20,
@@ -117,14 +166,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
                         ],
                       );
                     },
-                  ),
-                  const SizedBox(width: 8),
-                  // Logo
-                  Image.asset(
-                    'assets/images/suitableFocus.png',
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.contain,
                   ),
                 ],
               ),
@@ -400,9 +441,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           InkWell(
             onTap: () async {
               final instagramUrl = Uri.parse('https://www.instagram.com/suitablefocusptyltd');
-              if (await canLaunchUrl(instagramUrl)) {
-                await launchUrl(instagramUrl, mode: LaunchMode.externalApplication);
-              }
+              await _confirmAndOpenExternalUrl(instagramUrl, 'Instagram');
             },
             borderRadius: BorderRadius.circular(12),
             child: Container(
@@ -428,9 +467,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           InkWell(
             onTap: () async {
               final linkedInUrl = Uri.parse('https://www.linkedin.com/company/suitable-focus/posts/?feedView=all');
-              if (await canLaunchUrl(linkedInUrl)) {
-                await launchUrl(linkedInUrl, mode: LaunchMode.externalApplication);
-              }
+              await _confirmAndOpenExternalUrl(linkedInUrl, 'LinkedIn');
             },
             borderRadius: BorderRadius.circular(12),
             child: Container(

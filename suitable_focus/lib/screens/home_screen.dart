@@ -31,6 +31,14 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
+                  // Logo
+                  Image.asset(
+                    'assets/images/suitableFocus.png',
+                    width: 40,
+                    height: 40,
+                    fit: BoxFit.contain,
+                  ),
+                  const SizedBox(width: 12),
                   // User Avatar
                   CircleAvatar(
                     radius: 20,
@@ -109,14 +117,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       );
                     },
-                  ),
-                  const SizedBox(width: 8),
-                  // Logo
-                  Image.asset(
-                    'assets/images/suitableFocus.png',
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.contain,
                   ),
                 ],
               ),
