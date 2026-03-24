@@ -37,7 +37,7 @@ class _JoinScreenState extends State<JoinScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              
+
               // Title
               Column(
                 children: [
@@ -59,9 +59,9 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 60),
-              
+
               // Full Name input field
               TextField(
                 controller: _fullNameController,
@@ -98,9 +98,9 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 20),
-              
+
               // Email input field
               TextField(
                 controller: _emailController,
@@ -138,9 +138,9 @@ class _JoinScreenState extends State<JoinScreen> {
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
-              
+
               const SizedBox(height: 20),
-              
+
               // Create Username input field
               TextField(
                 controller: _usernameController,
@@ -177,9 +177,9 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 20),
-              
+
               // Create Password input field
               TextField(
                 controller: _passwordController,
@@ -217,9 +217,9 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 20),
-              
+
               // Confirm Password input field
               TextField(
                 controller: _confirmPasswordController,
@@ -257,9 +257,9 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 40),
-              
+
               // Confirm button
               SizedBox(
                 width: double.infinity,
@@ -289,9 +289,9 @@ class _JoinScreenState extends State<JoinScreen> {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 20),
-              
+
               // Disclaimer text
               Text(
                 "By clicking Confirm, you agree to Suitable Focus' T&Cs",
@@ -301,7 +301,7 @@ class _JoinScreenState extends State<JoinScreen> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              
+
               const SizedBox(height: 40),
             ],
           ),
@@ -310,4 +310,3 @@ class _JoinScreenState extends State<JoinScreen> {
     );
   }
 }
-

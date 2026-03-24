@@ -181,13 +181,10 @@ class _EventsScreenState extends State<EventsScreen> {
                     _buildSectionHeader('Campaigns', Icons.arrow_forward_ios),
                     const SizedBox(height: 12),
                     _buildEventCardList([
-                      "Let's Elevate: The Tangible Way",
-                      'Bayhill Annual tournament',
-                      'Suitable Focus x SARS | Tax 101',
-                      'Suitable Focus x Decode Africa Webinar',
-                      'Entrepreneur Incubation Hub',
+                      'SF x Sorbet Campaign',
+                      'SF x Eduvos Campaign',
                     ]),
-                    _buildPaginationDots(3, 0),
+                    _buildPaginationDots(2, 0),
 
                     const SizedBox(height: 32),
 
@@ -195,9 +192,7 @@ class _EventsScreenState extends State<EventsScreen> {
                     _buildSectionHeader('Past Events', Icons.arrow_forward_ios),
                     const SizedBox(height: 12),
                     _buildEventCardList([
-                      "Let's Elevate: The Tangible Way",
                       'Suitable Focus x SARS | Tax 101',
-                      'Suitable Focus x Decode Africa Webinar',
                       'Entrepreneur Incubation Hub',
                     ]),
                     _buildPaginationDots(3, 0),
@@ -214,11 +209,6 @@ class _EventsScreenState extends State<EventsScreen> {
                       'Entrepreneur Incubation Hub',
                     ]),
                     _buildPaginationDots(3, 0),
-
-                    const SizedBox(height: 32),
-
-                    // See All Section
-                    _buildSectionHeader('See All', Icons.arrow_forward_ios),
 
                     const SizedBox(height: 24),
                   ],
@@ -269,7 +259,15 @@ class _EventsScreenState extends State<EventsScreen> {
           final isDecodeAfrica = eventNames[index].contains("Decode Africa");
           final isSARS = eventNames[index].contains("Suitable Focus x SARS");
           final isEduvos = eventNames[index].contains("Entrepreneur Incubation Hub");
-          final hasBackgroundImage = isLetsElevate || isBayhill || isDecodeAfrica || isSARS || isEduvos;
+          final isSorbetCampaign = eventNames[index].contains('SF x Sorbet Campaign');
+          final isEduvosCampaign = eventNames[index].contains('SF x Eduvos Campaign');
+          final hasBackgroundImage = isLetsElevate ||
+              isBayhill ||
+              isDecodeAfrica ||
+              isSARS ||
+              isEduvos ||
+              isSorbetCampaign ||
+              isEduvosCampaign;
           String? imagePath;
           if (isLetsElevate) {
             imagePath = 'assets/images/LetsElevate.jpg';
@@ -281,6 +279,10 @@ class _EventsScreenState extends State<EventsScreen> {
             imagePath = 'assets/images/SARS-Webinar.jpeg';
           } else if (isEduvos) {
             imagePath = 'assets/images/SF-x-Eduvos.jpg';
+          } else if (isSorbetCampaign) {
+            imagePath = 'assets/images/graphic.jpg';
+          } else if (isEduvosCampaign) {
+            imagePath = 'assets/images/photography.jpeg';
           }
           return GestureDetector(
             onTap: () {

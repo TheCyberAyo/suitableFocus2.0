@@ -1,0 +1,11 @@
+{
+  "folders": [
+    {
+      "name": "suitable_focus",
+      "path": "suitable_focus"
+    }
+  ],
+  "settings": {
+    "dart.flutterSdkPath": "C:\\src\\flutter"
+  }
+}

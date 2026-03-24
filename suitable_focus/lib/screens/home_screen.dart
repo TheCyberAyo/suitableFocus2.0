@@ -4,10 +4,12 @@ import '../constants/app_colors.dart';
 import '../providers/cart_provider.dart';
 import 'events_screen.dart';
 import 'learn_screen.dart';
-import 'community_screen.dart';
 import 'services_screen.dart';
-import 'faqs_screen.dart';
+import 'community_screen.dart';
 import 'cart_screen.dart';
+import 'faqs_screen.dart';
+import 'ideation_foundation_course_screen.dart';
+import 'refer_earn_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,14 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  // Logo
-                  Image.asset(
-                    'assets/images/suitableFocus.png',
-                    width: 40,
-                    height: 40,
-                    fit: BoxFit.contain,
-                  ),
-                  const SizedBox(width: 12),
                   // User Avatar
                   CircleAvatar(
                     radius: 20,
@@ -49,16 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  // Greeting - Centered
+                  // Greeting
                   const Expanded(
-                    child: Center(
-                      child: Text(
-                        'Hello, Ayongezwa',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    child: Text(
+                      'Hi, Ayongezwa',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -132,22 +124,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     _buildSectionHeader('Continue', Icons.arrow_forward_ios),
                     const SizedBox(height: 12),
                     _buildContinueItem(
-                      Icons.menu_book,
-                      'SARS Compliance 101',
-                      '10%',
-                      0.10,
+                      Icons.school,
+                      'Ideation to Foundation',
+                      '15%',
+                      0.15,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const IdeationFoundationCourseScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _buildContinueItem(
-                      Icons.lightbulb,
-                      "Let's Elevate",
-                      '10%',
-                      0.10,
+                      Icons.calendar_view_week,
+                      'Bayhill Annual Tournament',
+                      '100%',
+                      1.0,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const EventsScreen(),
+                          ),
+                        );
+                      },
                     ),
                     _buildContinueItem(
                       Icons.groups,
                       'Eduvos x SF Hub',
-                      '10%',
-                      0.10,
+                      '100%',
+                      1.0,
                     ),
 
                     const SizedBox(height: 24),
@@ -197,12 +205,56 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _buildActionButton(Icons.shopping_cart, 'Book'),
-                          _buildActionButton(Icons.menu_book, 'Learn'),
-                          _buildActionButton(Icons.attach_money, 'Earn'),
-                          _buildActionButton(Icons.calendar_view_week, 'Attend'),
+                          Expanded(
+                            child: Center(
+                              child: _buildActionButton(
+                                Icons.shopping_cart,
+                                'Book',
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ServicesScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: _buildActionButton(
+                                Icons.menu_book,
+                                'Learn',
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LearnScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Center(
+                              child: _buildActionButton(
+                                Icons.calendar_view_week,
+                                'Attend',
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const EventsScreen(),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -219,49 +271,48 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         itemCount: 3,
                         itemBuilder: (context, index) {
-                          final events = [
-                            'Successful incubation with Eduvos',
-                            'Building A Legacy with Rudy Paige',
-                            'Unlocking AI with Eduvos',
+                          final eventCards = [
+                            {
+                              'title': 'Successful incubation w/ Eduvos',
+                              'image': 'assets/images/incubation.jpg',
+                            },
+                            {
+                              'title': 'Building A Legacy w/ Rudy Paige',
+                              'image': 'assets/images/Rudy.jpg',
+                            },
+                            {
+                              'title': 'Unlocking AI w/ Edunova',
+                              'image': 'assets/images/SF-x-Eduvos.jpg',
+                            },
                           ];
-                          final images = [
-                            'assets/images/incubation.jpg',
-                            'assets/images/Rudy.jpg',
-                            'assets/images/SuccessfulAi.jpg',
-                          ];
+                          final title = eventCards[index]['title']!;
+                          final imagePath = eventCards[index]['image']!;
                           return Container(
                             width: 200,
                             margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.all(16),
                             decoration: BoxDecoration(
-                              color: AppColors.accentColor,
                               borderRadius: BorderRadius.circular(12),
                               image: DecorationImage(
-                                image: AssetImage(images[index]),
+                                image: AssetImage(imagePath),
                                 fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                  Colors.black.withValues(alpha: 0.5),
-                                  BlendMode.darken,
-                                ),
                               ),
                             ),
-                            child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Text(
-                                events[index],
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  shadows: [
-                                    Shadow(
-                                      offset: Offset(1, 1),
-                                      blurRadius: 3,
-                                      color: Colors.black,
-                                    ),
-                                  ],
+                            child: Container(
+                              padding: const EdgeInsets.all(16),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.black.withValues(alpha: 0.45),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
                               ),
                             ),
                           );
@@ -273,113 +324,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     const SizedBox(height: 32),
 
-                    // Learn Today Section
-                    _buildSectionHeader('Learn Today', Icons.arrow_forward_ios),
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      height: 180,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        itemCount: 5,
-                        itemBuilder: (context, index) {
-                          final courses = [
-                            'AI & Small Business',
-                            'Scaling in African Markets',
-                            'Workflow Management',
-                            'Negotiation 101',
-                            'Content Strategy',
-                          ];
-                          final images = [
-                            'assets/images/AISmallBusiness.png',
-                            'assets/images/Scaling.jpg',
-                            'assets/images/workflow.jpeg',
-                            'assets/images/nagotiation.jpeg',
-                            'assets/images/contentStrategy.jpeg',
-                          ];
-                          return Container(
-                            width: 160,
-                            margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: AppColors.accentColor,
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                image: AssetImage(images[index]),
-                                fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                  Colors.black.withValues(alpha: 0.5),
-                                  BlendMode.darken,
-                                ),
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Align(
-                                  alignment: Alignment.topRight,
-                                  child: Icon(
-                                    Icons.star,
-                                    color: Colors.white,
-                                    size: 20,
-                                  ),
-                                ),
-                                const Spacer(),
-                                Text(
-                                  courses[index],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(1, 1),
-                                        blurRadius: 3,
-                                        color: Colors.black,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.access_time,
-                                      color: Colors.white,
-                                      size: 16,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    const Text(
-                                      '1hr',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        shadows: [
-                                          Shadow(
-                                            offset: Offset(1, 1),
-                                            blurRadius: 3,
-                                            color: Colors.black,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    _buildPaginationDots(2, 0),
-
-                    const SizedBox(height: 32),
-
                     // Discover More Section
                     _buildSectionHeader('Discover More', null),
                     const SizedBox(height: 12),
-                    _buildDiscoverItem(Icons.attach_money, 'Refer & Earn'),
+                    _buildDiscoverItem(
+                      Icons.attach_money,
+                      'Refer & Earn',
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ReferEarnScreen(),
+                          ),
+                        );
+                      },
+                    ),
                     _buildDiscoverItem(Icons.library_books, 'Resources'),
                     _buildDiscoverItem(
                       Icons.help_outline,
@@ -387,7 +346,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const FAQsScreen()),
+                          MaterialPageRoute(
+                            builder: (context) => const FAQsScreen(),
+                          ),
                         );
                       },
                     ),
@@ -429,96 +390,108 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildContinueItem(IconData icon, String title, String progress, double progressValue) {
+  Widget _buildContinueItem(
+    IconData icon,
+    String title,
+    String progress,
+    double progressValue, {
+    VoidCallback? onTap,
+  }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: AppColors.inputBackground,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon,
-              color: AppColors.accentColor,
-              size: 24,
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: AppColors.inputBackground,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                color: AppColors.accentColor,
+                size: 24,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              width: 40,
-              height: 40,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: 40,
-                    height: 40,
-                    child: CircularProgressIndicator(
-                      value: progressValue,
-                      strokeWidth: 4,
-                      backgroundColor: Colors.grey[800],
-                      valueColor: AlwaysStoppedAnimation<Color>(AppColors.accentColor),
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: CircularProgressIndicator(
+                        value: progressValue,
+                        strokeWidth: 4,
+                        backgroundColor: Colors.grey[800],
+                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.accentColor),
+                      ),
                     ),
-                  ),
-                  Text(
-                    progress,
-                    style: TextStyle(
-                      color: AppColors.accentColor,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      progress,
+                      style: TextStyle(
+                        color: AppColors.accentColor,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildActionButton(IconData icon, String label) {
-    return Column(
-      children: [
-        Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            color: AppColors.inputBackground,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppColors.accentColor.withValues(alpha: 0.3),
-              width: 1,
+  Widget _buildActionButton(IconData icon, String label, {VoidCallback? onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: AppColors.inputBackground,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: AppColors.accentColor.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: Icon(
+              icon,
+              color: AppColors.accentColor,
+              size: 28,
             ),
           ),
-          child: Icon(
-            icon,
-            color: AppColors.accentColor,
-            size: 28,
+          const SizedBox(height: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: AppColors.accentColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+            ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          label,
-          style: TextStyle(
-            color: AppColors.accentColor,
-            fontSize: 12,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -542,9 +515,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildDiscoverItem(IconData icon, String title, {VoidCallback? onTap}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: InkWell(
+      child: GestureDetector(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(8),
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
@@ -559,14 +531,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 size: 24,
               ),
               const SizedBox(width: 16),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
+              if (onTap != null)
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: AppColors.accentColor,
+                  size: 14,
+                ),
             ],
           ),
         ),
@@ -589,8 +569,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
-          // Navigate based on index
-          if (index == 1) {
+          if (index == 0) {
+            setState(() => _currentIndex = 0);
+          } else if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const EventsScreen()),
@@ -610,10 +591,6 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               MaterialPageRoute(builder: (context) => const CommunityScreen()),
             );
-          } else {
-            setState(() {
-              _currentIndex = index;
-            });
           }
         },
         type: BottomNavigationBarType.fixed,
@@ -646,4 +623,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/app_colors.dart';
-import 'login_screen.dart';
+import 'home_screen.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
@@ -11,70 +11,18 @@ class InitialScreen extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Spacer to push content to bottom half
-            const Spacer(),
-            
-            // Pagination dots
-            Padding(
-              padding: const EdgeInsets.only(bottom: 40.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Filled dot (active)
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(
-                      color: AppColors.accentColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  // Outlined dot
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.accentColor, width: 1),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  // Outlined dot
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: AppColors.accentColor, width: 1),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            
-            // Logo above main text content
-            Padding(
-              padding: const EdgeInsets.only(bottom: 24.0),
-              child: Image.asset(
-                'assets/images/suitableFocus.png',
-                width: 120,
-                height: 120,
-                fit: BoxFit.contain,
-              ),
-            ),
 
             // Main text content
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     'Join 100+',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -84,6 +32,7 @@ class InitialScreen extends StatelessWidget {
                   ),
                   Text(
                     'entrepreneurs',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -93,6 +42,7 @@ class InitialScreen extends StatelessWidget {
                   ),
                   Text(
                     'scaling their',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -102,6 +52,7 @@ class InitialScreen extends StatelessWidget {
                   ),
                   Text(
                     'businesses.',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -112,9 +63,9 @@ class InitialScreen extends StatelessWidget {
                 ],
               ),
             ),
-            
+
             const SizedBox(height: 40),
-            
+
             // Get Started button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -122,9 +73,9 @@ class InitialScreen extends StatelessWidget {
                 width: double.infinity,
                 child: OutlinedButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
                   style: OutlinedButton.styleFrom(
@@ -145,7 +96,7 @@ class InitialScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 60),
           ],
         ),
@@ -153,19 +104,3 @@ class InitialScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
