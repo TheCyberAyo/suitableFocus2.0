@@ -3,8 +3,12 @@ import 'package:provider/provider.dart';
 import 'constants/app_colors.dart';
 import 'providers/cart_provider.dart';
 import 'screens/initial_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const CompanyApp());
 }
 
